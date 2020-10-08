@@ -1,4 +1,3 @@
-
 import random
 
 def lever_option(coins):
@@ -10,7 +9,10 @@ def lever_option(coins):
         return coins
     return coins
         
-
+def playagain():
+    again = input("Play again (y/n): ")
+    if again.lower() == 'y':
+        main()
 def canTravel(x,y,coins,moved):
     #hér kemur "You can travel"
     
@@ -101,7 +103,6 @@ def main():
     while True:
         valid = canTravel(x,y,coins,moved)
         coins = valid[1]
-        
         if valid[0] == 'victory':
             print("Victory! Total coins {}. Moves {}.".format(coins,moves))
             break
@@ -111,9 +112,7 @@ def main():
         if (movement == 'inval'):
             moved = False
         else:
-            moved = True
-            
-            
+            moved = True    
         if movement == 'Xadd':
             x+=1
         elif movement == 'Xsub':
@@ -122,11 +121,5 @@ def main():
             y+=1
         elif movement == 'Ysub':
             y-=1
+    playagain()
 main()
-answer = "y"
-while (answer.lower() == "y"):
-    answer = input("Play again (y/n): ")
-    if (answer.lower() == "y"):
-        main()
-    else:
-        break

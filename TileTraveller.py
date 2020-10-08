@@ -1,6 +1,4 @@
-x = 1
-y = 1
-coins = 0
+
 
 def lever_option(coins):
     pullAns = input("Pull a lever (y/n): ")
@@ -11,7 +9,7 @@ def lever_option(coins):
     return coins
         
 
-while True:
+def canTravel(x,y,coins,moved):
     #hér kemur "You can travel"
     
     if x==1:
@@ -19,7 +17,8 @@ while True:
             valid = "(N)orth."
             val_input= 'n', 'N'
         elif y==2:
-            coins = lever_option(coins)
+            if (moved):
+                coins = lever_option(coins)
             valid = "(N)orth or (E)ast or (S)outh."
             val_input= 'n', 'N', 'e', 'E', 's', 'S'
         elif y==3:
@@ -30,38 +29,48 @@ while True:
             valid = "(N)orth."
             val_input= 'n', 'N'
         elif y==2:
-            coins = lever_option(coins)
+            if (moved):
+                coins = lever_option(coins)
             valid = "(S)outh or (W)est."
             val_input= 'w', 'W', 's', 'S'
         elif y==3:
-            coins = lever_option(coins)
+            if (moved):
+                coins = lever_option(coins)
             valid = "(E)ast or (W)est."
-            val_input=  'e', 'E', 'w', 'W'
+            val_input=  'e', 'E', 'w', 'W'           
     elif x==3:
         if y == 1:
-            print("Victory! Total coins {}.".format(coins))
-            break
+            
+            val_input = 'victory'
         elif y==2:
-            coins = lever_option(coins)
+            if (moved):
+                coins = lever_option(coins)
             valid ="(N)orth or (S)outh."
             val_input= 'n','N','s','S'
         elif y==3:
             valid ="(S)outh or (W)est."
             val_input= 'w', 'W', 's', 'S'
-    print("You can travel:", valid)
-
+    if val_input != 'victory':
+        print("You can travel:", valid)
+    return val_input, coins
+def move(val_input):
     direction = str(input("Direction: "))
     if direction in val_input:
         if (direction == 'n') or (direction == 'N'):
-            y += 1
+            #y += 1
+            return 'Yadd'
         elif (direction == 'w') or (direction == 'W'):
-            x -= 1
+            #x -= 1
+            return 'Xsub'
         elif (direction == 'e') or (direction == 'E'):
-            x += 1
+            #x += 1
+            return 'Xadd'
         elif (direction == 's') or (direction == 'S'):
-            y -= 1
+            #y -= 1
+            return 'Ysub'
     else:
         print("Not a valid direction!")
+        return 'inval'
     #directions búið
     
     #(S)outh
@@ -76,3 +85,33 @@ while True:
 #2,3 valid = w,e
 #3,3 valid = w,s
 #3,2 valid = n,s
+def main():
+    x = 1
+    y = 1
+    coins = 0
+    moved = True
+    preveiusMovemont = ''
+    
+    while True:
+        valid = canTravel(x,y,coins,moved)
+        coins = valid[1]
+        if valid[0] == 'victory':
+            print("Victory! Total coins {}.".format(coins))
+            break
+        movement = move(valid[0])
+        
+        if (movement == 'inval'):
+            moved = False
+        else:
+            moved = True
+            
+            
+        if movement == 'Xadd':
+            x+=1
+        elif movement == 'Xsub':
+            x-=1
+        elif movement == 'Yadd':
+            y+=1
+        elif movement == 'Ysub':
+            y-=1
+main()

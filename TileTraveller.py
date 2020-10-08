@@ -6,7 +6,7 @@ def lever_option(coins):
     pullAns = input("Pull a lever (y/n): ")
     if (pullAns == "y"):
         coins += 1
-        print("You received 1 coin, your total is now", coins)
+        print("You received 1 coin, your total is now {}.".format(coins))
         
 
 while True:
@@ -28,16 +28,19 @@ while True:
             valid = "(N)orth."
             val_input= 'n', 'N'
         elif y==2:
+            lever_option(coins)
             valid = "(S)outh or (W)est."
             val_input= 'w', 'W', 's', 'S'
         elif y==3:
+            lever_option(coins)
             valid = "(E)ast or (W)est."
             val_input=  'e', 'E', 'w', 'W'
     elif x==3:
         if y == 1:
-            print("Victory!")
+            print("Victory! Total coins {}."format(coins))
             break
         elif y==2:
+            lever_option(coins)
             valid ="(N)orth or (S)outh."
             val_input= 'n','N','s','S'
         elif y==3:

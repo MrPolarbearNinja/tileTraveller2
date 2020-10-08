@@ -1,15 +1,23 @@
-#https://github.com/MrPolarbearNinja/TileTraveller.git
-
 x = 1
 y = 1
+coins = 0
+
+def lever_option(coins):
+    pullAns = input("Pull a lever (y/n): ")
+    if (pullAns == "y"):
+        coins += 1
+        print("You received 1 coin, your total is now", coins)
+        
 
 def canTravel(x,y):
     #hér kemur "You can travel"
+    
     if x==1:
         if y == 1:
             valid = "(N)orth."
             val_input= 'n', 'N'
         elif y==2:
+            lever_option(coins)
             valid = "(N)orth or (E)ast or (S)outh."
             val_input= 'n', 'N', 'e', 'E', 's', 'S'
             lever = True

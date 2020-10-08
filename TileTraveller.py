@@ -115,3 +115,10 @@ def main():
         elif movement == 'Ysub':
             y-=1
 main()
+answer = "y"
+while (answer.lower() == "y"):
+    answer = input("Play again (y/n): ")
+    if (answer.lower() == "y"):
+        main()
+    else:
+        break

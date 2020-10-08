@@ -3,7 +3,7 @@
 x = 1
 y = 1
 
-while True:
+def canTravel(x,y):
     #hér kemur "You can travel"
     if x==1:
         if y == 1:
@@ -12,6 +12,7 @@ while True:
         elif y==2:
             valid = "(N)orth or (E)ast or (S)outh."
             val_input= 'n', 'N', 'e', 'E', 's', 'S'
+            lever = True
         elif y==3:
             valid = "(E)ast or (S)outh."
             val_input= 'e', 'E', 's', 'S'
@@ -22,9 +23,11 @@ while True:
         elif y==2:
             valid = "(S)outh or (W)est."
             val_input= 'w', 'W', 's', 'S'
+            lever = True
         elif y==3:
             valid = "(E)ast or (W)est."
             val_input=  'e', 'E', 'w', 'W'
+            lever = True
     elif x==3:
         if y == 1:
             print("Victory!")
@@ -32,21 +35,28 @@ while True:
         elif y==2:
             valid ="(N)orth or (S)outh."
             val_input= 'n','N','s','S'
+            lever = True
         elif y==3:
             valid ="(S)outh or (W)est."
             val_input= 'w', 'W', 's', 'S'
     print("You can travel:", valid)
-
+    return val_input
+def move(val_input)
     direction = str(input("Direction: "))
     if direction in val_input:
         if (direction == 'n') or (direction == 'N'):
-            y += 1
+            #y += 1
+            return 'Yadd'
         elif (direction == 'w') or (direction == 'W'):
-            x -= 1
+            #x -= 1
+            return 'Xsub'
         elif (direction == 'e') or (direction == 'E'):
-            x += 1
+            #x += 1
+            return 'Xadd'
         elif (direction == 's') or (direction == 'S'):
-            y -= 1
+            #y -= 1
+            return 'Ysub'
+
     else:
         print("Not a valid direction!")
     #directions búið
@@ -63,4 +73,9 @@ while True:
 #2,3 valid = w,e
 #3,3 valid = w,s
 #3,2 valid = n,s
-  
+def main():
+    x=1
+    y=1
+    while True:
+        valid = canTravel(x,y)
+        move = move(valid)

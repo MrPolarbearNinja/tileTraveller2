@@ -40,7 +40,7 @@ def canTravel(x,y):
             lever = True
     elif x==3:
         if y == 1:
-            print("Victory! Total coins {}."format(coins))
+            print("Victory! Total coins {}.".format(coins))
             break
         elif y==2:
             lever_option(coins)

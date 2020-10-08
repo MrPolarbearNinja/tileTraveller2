@@ -1,85 +1,73 @@
-#https://github.com/MrPolarbearNinja/TileTraveller.git
+x = 1
+y = 1
+coins = 0
 
-posibleRouts = ""
-curentPlace = "11"
-#Test Coment
+def lever_option(coins):
+    pullAns = input("Pull a lever (y/n): ")
+    if (pullAns == "y"):
+        coins += 1
+        print("You received 1 coin, your total is now", coins)
+        
 
-def update_place(move, curentPlace):
-    if move == "n":
-        curentPlace = str(int(curentPlace) + 1)
-    elif move == "e":
-        curentPlace = str(int(curentPlace) + 10)
-    elif move == "s":
-        curentPlace = str(int(curentPlace) - 1)
-    elif move == "w":
-        curentPlace = str(int(curentPlace) - 10)
-    return curentPlace
-
-
-def printPosibleDirections (placement):
-    posible = ""
-    writeLine = "You can travel: "
-    counter = 0
-    posibleRouts = ""
+while True:
+    #hér kemur "You can travel"
     
-    if not(placement[1] == "3"):
-        if not(placement[0] == "2" and placement[1] == "2"):
-            writeLine += "(N)orth"
-            posible += "n"
-            counter += 1
-    if not(placement[0] == "3"):
-        if not(placement[0] == "1" and placement[1] == "1"):
-            if not(placement[0] == "2" and placement[1] == "2"):
-                if not(placement[0] == "2" and placement[1] == "1"):
-                    if(counter > 0):
-                        writeLine += " or "
-                    writeLine += "(E)ast"
-                    posible += "e"
-                    counter += 1
-    if not(placement[1] == "1"):
-        if not(placement[0] == "2" and placement[1] == "3"):
-            if(counter > 0):
-                writeLine += " or "
-            writeLine += "(S)outh"
-            posible += "s"
-            counter += 1
-    if not(placement[0] == "1"):
-        if not(placement[0] == "2" and placement[1] == "1"):
-            if not(placement[0] == "3" and placement[1] == "1"):
-                if not(placement[0] == "3" and placement[1] == "2"):
-                    if(counter > 0):
-                        writeLine += " or "
-                    writeLine += "(W)est"
-                    posible += "w"
-    print(writeLine + ".")
-    posibleRouts = updateForbiten(posible, posibleRouts)
-    return posibleRouts
+    if x==1:
+        if y == 1:
+            valid = "(N)orth."
+            val_input= 'n', 'N'
+        elif y==2:
+            lever_option(coins)
+            valid = "(N)orth or (E)ast or (S)outh."
+            val_input= 'n', 'N', 'e', 'E', 's', 'S'
+        elif y==3:
+            valid = "(E)ast or (S)outh."
+            val_input= 'e', 'E', 's', 'S'
+    elif x==2:
+        if y == 1:
+            valid = "(N)orth."
+            val_input= 'n', 'N'
+        elif y==2:
+            valid = "(S)outh or (W)est."
+            val_input= 'w', 'W', 's', 'S'
+        elif y==3:
+            valid = "(E)ast or (W)est."
+            val_input=  'e', 'E', 'w', 'W'
+    elif x==3:
+        if y == 1:
+            print("Victory!")
+            break
+        elif y==2:
+            valid ="(N)orth or (S)outh."
+            val_input= 'n','N','s','S'
+        elif y==3:
+            valid ="(S)outh or (W)est."
+            val_input= 'w', 'W', 's', 'S'
+    print("You can travel:", valid)
 
-def updateForbiten(fb_list, posibleRouts):
-    posibleRouts = fb_list
-    return posibleRouts
-    
-def checkPosible(WhatToCheck):
-    if(WhatToCheck in posibleRouts):
-        return True
+    direction = str(input("Direction: "))
+    if direction in val_input:
+        if (direction == 'n') or (direction == 'N'):
+            y += 1
+        elif (direction == 'w') or (direction == 'W'):
+            x -= 1
+        elif (direction == 'e') or (direction == 'E'):
+            x += 1
+        elif (direction == 's') or (direction == 'S'):
+            y -= 1
     else:
-        return False
-
-
-while (True):
-    posibleRouts = printPosibleDirections(curentPlace)
-    direction = input("Direction: ")
-    direction = direction.lower()
-
-    if not(direction == "n" or direction == "e" or direction == "s" or  direction == "w"):
         print("Not a valid direction!")
-    else:
-        if(checkPosible(direction)):
-            curentPlace = update_place(direction, curentPlace)
-        else:
-            print("Not a valid direction!")
-    if (curentPlace == "31"):
-        print("Victory!")
-        break
-            
-                      
+    #directions búið
+    
+    #(S)outh
+    #(E)ast
+    #(N)orth
+    #(W)est
+    #1,1 valid = n
+#1,2 valid = n,s,e
+#1,3 valid = s,e
+#2,1 valid = n
+#2,2 valid = w,s
+#2,3 valid = w,e
+#3,3 valid = w,s
+#3,2 valid = n,s

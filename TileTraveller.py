@@ -1,7 +1,9 @@
 
+import random
 
 def lever_option(coins):
-    pullAns = input("Pull a lever (y/n): ")
+    pullAns = random.choice(['y', 'n'])
+    print("Pull a lever (y/n):", pullAns)
     if (pullAns == "y"):
         coins += 1
         print("You received 1 coin, your total is now {}.".format(coins))
@@ -54,7 +56,8 @@ def canTravel(x,y,coins,moved):
         print("You can travel:", valid)
     return val_input, coins
 def move(val_input):
-    direction = str(input("Direction: "))
+    direction = random.choice(['n', 'e', 's', 'w'])
+    print("Direction:", direction)
     if direction in val_input:
         if (direction == 'n') or (direction == 'N'):
             #y += 1
@@ -90,15 +93,20 @@ def main():
     y = 1
     coins = 0
     moved = True
-    preveiusMovemont = ''
+    moves = 0
+
+    seed = int(input("Input seed: "))
+    random.seed(seed)
     
     while True:
         valid = canTravel(x,y,coins,moved)
         coins = valid[1]
+        
         if valid[0] == 'victory':
-            print("Victory! Total coins {}.".format(coins))
+            print("Victory! Total coins {}. Moves {}.".format(coins,moves))
             break
         movement = move(valid[0])
+        moves += 1
         
         if (movement == 'inval'):
             moved = False

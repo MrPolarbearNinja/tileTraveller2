@@ -2,7 +2,7 @@
 
 posibleRouts = ""
 curentPlace = "11"
-
+#Test Coment
 
 def update_place(move, curentPlace):
     if move == "n":
